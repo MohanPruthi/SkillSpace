@@ -1,0 +1,14 @@
+mongo pass: Rvz7IeLGPS1PjC9q
+
+app password raghavpruthi33@gmail.com :
+name: codeHelp
+pass: rszr ardk rmcu dkqz 
+
+
+
+
+ques:-
+.populate
+.exec
+cronjob
+checkSum
