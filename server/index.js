@@ -13,7 +13,7 @@ const db = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const {cloudinaryConnect} = require("./config/cloudinary");
-const fileUpload = require("express-fileupload");
+const fileUpload = require("express-fileupload"); 
 
 // connect DB
 db.connect();

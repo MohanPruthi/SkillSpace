@@ -9,6 +9,7 @@ import TimelineSection from '../components/core/homePage/TimelineSection';
 import LearningLanguageSection from '../components/core/homePage/LearningLanguageSection';
 import InstructorSection from '../components/core/homePage/InstructorSection';
 import Footer from '../components/common/Footer';
+import ExploreMore from '../components/core/homePage/ExploreMore';
 
 const Home = () => {
   return (
@@ -31,8 +32,7 @@ const Home = () => {
         </Link>
 
         <div className='text-center text-4xl font-semibold mt-7'>
-            Empower Your Future with 
-            <HighlightText text={"Coding Skills"} />
+            Empower Your Future with <HighlightText text={"Coding Skills"} />
         </div>
 
         <div className=' mt-4 w-[90%] text-center text-lg font-bold text-richblack-300'>
@@ -60,14 +60,12 @@ const Home = () => {
         </div>
 
         {/* Code Section 1  */}
-        <div >
+        <div className=''>
             <CodeBlocks 
                 position={"lg:flex-row"}
                 heading={
                     <div className='text-4xl font-semibold'>
-                        Unlock Your
-                        <HighlightText text={"coding potential"}/>
-                        with our online courses
+                        Unlock Your <HighlightText text={"coding potential"}/> with our online courses
                     </div>
                 }
                 subheading = {
@@ -88,8 +86,9 @@ const Home = () => {
                     }
                 }
 
-                codeblock={`<<!DOCTYPE html>\n<html>\nhead><title>Example</title><linkrel="stylesheet"href="styles.css">\n/head>\n`}
+                codeblock={`<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n</head>\n<body>\n <h1><a href="/">Header</a>\n</h1>\n<a href="about">About</a>\n</body>\n</html>`}
                 codeColor={"text-yellow-25"}
+                backgroudGradient={"bg-gradient-to-br from-[#8A2BE2] via-[#FFA500] to-[#F8F8FF] opacity-[20%]  blur-[34px] translate-x-[-10%] translate-y-[-10%]"}
             />
         </div>
 
@@ -121,10 +120,13 @@ const Home = () => {
                     }
                 }
 
-                codeblock={`<<!DOCTYPE html>\n<html>\nhead><title>Example</title><linkrel="stylesheet"href="styles.css">\n/head>\n`}
+                codeblock={`<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n</head>\n<body>\n <h1><a href="/">Header</a>\n</h1>\n<a href="about">About</a>\n</body>\n</html>`}
                 codeColor={"text-yellow-25"}
+                backgroudGradient={"bg-gradient-to-br from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] opacity-[20%]  blur-[34px] translate-x-[-10%] translate-y-[-10%]"}
             />
         </div>
+
+        <ExploreMore/>
 
       </div>
 
@@ -191,9 +193,9 @@ const Home = () => {
 
             <InstructorSection />
 
-            <h2 className='text-center text-4xl font-semobold mt-10'>Review from Other learners</h2>
+            <h2 className='text-center text-4xl font-semobold mt-10'>Reviews from Other learners</h2>
             {/* Review Slider here */}
-            <div className='h-[400px] w-[400px] border border-pure-greys-5'>
+            <div className='h-[300px] w-[300px] border border-pure-greys-5'>
 
             </div>
         </div>

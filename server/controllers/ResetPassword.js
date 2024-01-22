@@ -9,7 +9,7 @@ exports.resetPasswordToken = async(req, res) => {
         const email = req.body.email;
 
         const user = User.findOne({email: email});
-        if(!user){
+        if(!user){ 
             return res.json({
                 success:false,
                 message:'Your Email is not registered with us'

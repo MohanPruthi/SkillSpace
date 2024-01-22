@@ -5,9 +5,9 @@ import { TypeAnimation } from 'react-type-animation'
 
 const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, codeblock, backgroudGradient, codeColor}) => {
   return (
-    <div className={`flex ${position} my-20 justify-between gap-10`}>
+    <div className={`flex ${position} my-20 justify-between gap-[98px]`}>
         {/* section-1 */}
-      <div>
+      <div className='w-[486px] '>
         {heading}
         <div className='text-richblack-300 font-bold '>
             {subheading}
@@ -29,10 +29,13 @@ const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, codeblock,
 
 
         {/* section-2 */}
-      <div>
+      <div className='w-[534px] relative'>
         {/*HW -> BG gradient*/}
-        <div className=' h-fit  flex flex-row text-10[px] w-[100%] py-4 lg:w-[500px]'>
-            <div className='text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold'>
+        <div className={`absolute rounded-full aspect-w-4 aspect-h-3 w-[372.95px] h-[257.05px] ${backgroudGradient}`}>
+
+        </div>
+        <div className=' h-fit  flex flex-row text-10[px] w-[470px] py-4 bg-gradient-to-tr from-[rgba(14,26,45,0.24)] to-[rgba(17,30,50,0.38)] '>
+          <div className='text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold'>
                 <p>1</p>
                 <p>2</p>
                 <p>3</p>
@@ -61,6 +64,7 @@ const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, codeblock,
                     omitDeletionAnimation={true}
                 />
             </div>
+            
         </div>
       </div>
     </div>

@@ -72,7 +72,7 @@ const TimelineSection = () => {
 
                 <div className='flex gap-5 items-center px-7'>
                 <p className='text-3xl font-bold'>250</p>
-                    <p className='text-caribbeangreen-300 text-sm'>TYpe of Courses</p>
+                    <p className='text-caribbeangreen-300 text-sm'>Type of Courses</p>
                 </div>
 
             </div>

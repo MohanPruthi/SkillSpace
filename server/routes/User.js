@@ -11,7 +11,7 @@ const {
 } = require("../controllers/Auth")
 const {
   resetPasswordToken,
-  resetPassword, 
+  resetPassword,  
 } = require("../controllers/ResetPassword")
 
 const { auth } = require("../middlewares/auth")
