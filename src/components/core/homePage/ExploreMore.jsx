@@ -17,7 +17,7 @@ const ExploreMore = () => {
         setCurrentTab(value);                  // sus
         const result = HomePageExplore.filter((course) => course.tag === value);      
         setCourses(result[0].courses);
-        setCurrentTab(result[0].courses[0].heading);
+        setCurrentCard(result[0].courses[0].heading);
     }
     return (
         <div className='relative'>
@@ -29,12 +29,12 @@ const ExploreMore = () => {
                 Learn to build anything you can imagine
             </p>
 
-            <div className='mt-5 flex flex-row rounded-full bg-richblack-800 mb-5 px-2 py-2 border-b-[1px] border-richblack-50'>
+            <div className='mt-5 flex flex-row rounded-full bg-richblack-800 mb-5 px-2 py-2 border-b-[1px] border-richblack-50 gap-5'>
                 {
                     tabsname.map( (element, index) => {
                         return (
                             <div className={`text-[16px] flex flex-row items-center gap-2  ${currentTab === element? "bg-richblack-900 text-richblack-5 font-medium" : "text-richblack-200"}
-                            rounded-full translation-all duration-200 cursor-pointer hover:bg-richblack-900 hover:text-richblack-25 px-7 py-3 m`}
+                            rounded-full translation-all duration-200 cursor-pointer hover:bg-richblack-700 hover:text-richblack-25 px-7 py-3 m`}
                             key={index}
                             onClick={() => setMyCards(element)}
                             >
@@ -48,7 +48,7 @@ const ExploreMore = () => {
             <div className='lg:h-[200px]'></div>
 
             {/* course cards */}
-            <div className='flex flex-row justify-between absolute translate-y-[-50%] translate-x-[-20%] z-10 gap-10'>   
+            <div className='flex flex-row justify-between translate-x-[-16%] absolute translate-y-[-50%] z-10 gap-10'>   
                 {
                     courses.map((course, index) => {
                         return (

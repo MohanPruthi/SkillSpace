@@ -16,7 +16,7 @@ const Home = () => {
 
     <div>
       {/* Section1  */}
-      <div   className='w-[1440px] mt-[124px] relative mx-auto flex flex-col max-w-maxContent items-center 
+      <div   className='w-11/12 mt-[124px] relative mx-auto flex flex-col max-w-maxContent items-center 
       text-white justify-between'>
 
         <Link to={"/signup"}>
@@ -121,7 +121,7 @@ const Home = () => {
                 }
 
                 codeblock={`<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n</head>\n<body>\n <h1><a href="/">Header</a>\n</h1>\n<a href="about">About</a>\n</body>\n</html>`}
-                codeColor={"text-yellow-25"}
+                codeColor={"text-blue-25"}
                 backgroudGradient={"bg-gradient-to-br from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] opacity-[20%]  blur-[34px] translate-x-[-10%] translate-y-[-10%]"}
             />
         </div>
@@ -133,9 +133,9 @@ const Home = () => {
         {/*Section 2  */}
         <div className='bg-pure-greys-5 text-richblack-700'>
             <div className=' w-[1440px] relative mx-auto flex flex-col  items-center justify-between'>
-                <div className='homepage_bg h-[320px] w-screen mt-[5px]'>
+                <div className='homepage_bg h-[320px] w-screen mt-[5px]'> 
 
-                <div className='flex flex-col items-center justify-between gap-5 mx-auto '>
+                <div className='flex flex-col items-center justify-between gap-5 mx-auto mt-[110px]'>
                     <div className='flex flex-row text-white mt-[100px] gap-7'>
                         <CTAButton active={true} linkto={"/sginup"}>
                             <div className='flex flex-row'>
