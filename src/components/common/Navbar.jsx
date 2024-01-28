@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import { apiConnector } from '../../services/apiconncetor';
-import { categories } from '../../services/api';
+import { categories } from '../../services/apis';
 import {IoIosArrowDropdownCircle} from "react-icons/io";
 
 // const subLinks = [
@@ -31,9 +31,11 @@ const Navbar = () => {
 
     const fetchSubLinks = async() => {
         try{
+            console.log("catiiee")
+            console.log(categories.CATEGORIES_API)
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing Sublinks result:" , result);
-            setSubLinks(result.data.data);
+            setSubLinks(result.data.allCategories);
         }
         catch(error) {
             console.log("Could not fetch the category list");
@@ -42,7 +44,7 @@ const Navbar = () => {
 
     useEffect( () => {
         fetchSubLinks();
-    },[] ) 
+    },[]) 
 
     const location = useLocation();
     const matchRoute = (route) => {           
@@ -82,7 +84,7 @@ const Navbar = () => {
                                                     subLinks?.length ? (
                                                             subLinks.map( (subLink, index) => (
                                                                 <Link to={`${subLink.link}`} key={index}>
-                                                                    <p>{subLink.title}</p>
+                                                                    <p>{subLink.name}</p>
                                                                 </Link>
                                                             ) )
                                                     ) : (<div></div>)
@@ -110,7 +112,7 @@ const Navbar = () => {
                     {
                         user && user?.accountType != "Instructor" && (
                             <Link to="/dashboard/cart" className='relative'>
-                                <AiOutlineShoppingCart />
+                                <AiOutlineShoppingCart className='text-white'/>
                                 {
                                     totalItems > 0 && (
                                         <span>
@@ -140,7 +142,7 @@ const Navbar = () => {
                         )
                     }
                     {
-                        token !== null && <div></div> //<ProfileDropDown />
+                        token !== null && <div className='text-white cursor-pointer'>acc</div> //<ProfileDropDown />
                     }
                 </div>
              </div>

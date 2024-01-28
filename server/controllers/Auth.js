@@ -15,7 +15,7 @@ exports.sendOTP = async(req, res) => {
         const{email} = req.body;
 
         // check if email is registered 
-        const chechkUserPresent = User.findOne({email});
+        const chechkUserPresent = await User.findOne({email});
 
         if(chechkUserPresent){
             return res.status(401).json({
@@ -32,30 +32,29 @@ exports.sendOTP = async(req, res) => {
         });
         console.log("OTP is: ", otp);
         
-        let result = await OTP.find({otp: otp});
+        const result = await OTP.findOne({otp: otp});
 
         while(result){
-            var otp = otpGenerator.generate(6, {
+                otp = otpGenerator.generate(6, {
                 upperCaseAlphabets:false,
                 lowerCaseAlphabets:false,
                 specialChars:false,
             });
-            console.log("OTP is: ", otp);
-            
-            let result = await OTP.find({otp: otp});
-        }
 
+            result = await OTP.findOne({otp: otp});
+        }
+        console.log("OTP F is: ", otp);
         const otpPayload = {email, otp};
 
         //create an entry for OTP in DB
         const otpBody = await OTP.create(otpPayload);
-        console.log(otpBody);
+        console.log(otp.body);
 
         res.status(200).json({
             success:true,
             message:'OTP Sent Successfully',
             otp,
-        })
+        }) 
     }
     catch(err){
         console.log(err);

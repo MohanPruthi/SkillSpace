@@ -39,10 +39,19 @@ app.use(
 cloudinaryConnect();
 
 //mount routes
-app.use("api/v1/auth", userRoutes);
-app.use("api/v1/profile", profileRoutes);
-app.use("api/v1/payment", paymentRoutes);
-app.use("api/v1/course", courseRoutes);
+app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/course", courseRoutes);
+
+// testing route
+app.get("/test", (req, res) => {
+    console.log("hello doston")
+    return res.json({
+        success: true,
+        message: "test route working hui hui"
+    })
+})
 
 // default route
 app.get("/", (req, res) => {

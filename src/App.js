@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup"
+import ForgotPass from "./pages/ForgotPass";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             // </OpenRoute>
           }
         />
+
+        <Route path="forgot-password" element={<ForgotPass/>}/>
       </Routes>
     </div>
   );  

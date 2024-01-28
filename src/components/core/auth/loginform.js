@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import ForgotPass from '../../../pages/ForgotPass';
 
 
 const LoginForm = ({setIsLoggedIn}) => {
@@ -69,14 +70,14 @@ const LoginForm = ({setIsLoggedIn}) => {
                 {showPassword ? (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>) : (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>)}
             </span>
 
-            <Link to="#">
+            <Link to="/forgot-password">
                 <p className='text-xs text-blue-100 mt-2 max-w-max ml-auto'>
                     Forgot Password
                 </p>
             </Link>
         </label>
 
-        <button className='bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-[12px] py-[8px] mt-6'>
+        <button className='bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-[12px] py-[8px] mt-6'> 
             Sign In
         </button>
 
