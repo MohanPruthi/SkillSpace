@@ -5,6 +5,7 @@ import Navbar from "./components/common/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup"
 import ForgotPass from "./pages/ForgotPass";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -16,16 +17,11 @@ function App() {
 
         <Route path="signup" element={<Signup />} />
 
-        <Route
-          path="login"
-          element={
-            // <OpenRoute>      //TO-DO
-              <Login />
-            // </OpenRoute>
-          }
-        />
+        <Route path="login" element={<Login />} />
 
         <Route path="forgot-password" element={<ForgotPass/>}/>
+
+        <Route path="*" element={<Error/>}/>
       </Routes>
     </div>
   );  
