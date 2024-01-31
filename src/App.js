@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup"
 import ForgotPass from "./pages/ForgotPass";
 import Error from "./pages/Error";
+import UpdatePassword from "./pages/UpdatePassword";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         <Route path="login" element={<Login />} />
 
         <Route path="forgot-password" element={<ForgotPass/>}/>
+
+        <Route path="update-password/:id" element={<UpdatePassword/>}/>   {/*     /:id */}
+
+
 
         <Route path="*" element={<Error/>}/>
       </Routes>

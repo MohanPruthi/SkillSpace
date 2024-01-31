@@ -4,6 +4,7 @@ import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconncetor"
 import { endpoints } from "../apis"
+import { useNavigate } from "react-router-dom"
 
 const {
   SENDOTP_API,
@@ -13,7 +14,10 @@ const {
   RESETPASSWORD_API,
 } = endpoints
 
+
+
 export function sendOtp(email, navigate) {
+  
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
@@ -143,6 +147,7 @@ export function getPasswordResetToken(email, setEmailSent) {
 }
 
 export function resetPassword(password, confirmPassword, token, navigate) {
+  
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
@@ -160,7 +165,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
       }
 
       toast.success("Password Reset Successfully")
-      navigate("/login")
+      // navigate1("/login")
     } catch (error) {
       console.log("RESETPASSWORD ERROR............", error)
       toast.error("Failed To Reset Password")
