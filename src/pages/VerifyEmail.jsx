@@ -14,20 +14,20 @@ const VerifyEmail = () => {
     const {loading, signupData} = useSelector((state) => state.auth);
     const[otp, setOtp] = useState("");
 
-    // useEffect(()=>{
-    //     if(!signupData){
-    //         navigate("/signup")
-    //     }
-    // }, [])
+    useEffect(()=>{
+        if(!signupData){
+            navigate("/signup")
+        }
+    }, [])
 
-    const 
-        accountType="Student",
-        firstName="a",
-        lastName="b",
-        email="raghavpruthi33@gmail.com",
-        password="1",
-        confirmPassword="1";
-    // } = signupData
+    const {
+        accountType,
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword
+    } = signupData
 
     const handleOnSubmit = (event) => {
         event.preventDefault();

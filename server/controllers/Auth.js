@@ -126,7 +126,7 @@ exports.signUp = async(req,res) => {
 
         const user = await User.create({
             firstName, lastName, email, password:hashedPassword, accountType, additionalDetails:profileDetails._id,
-            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
+            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${""}${lastName}`
         })
         console.log("New User created: ", user);
 
@@ -157,7 +157,7 @@ exports.login = async(req, res) => {
             });
         }
 
-        const user = await User.findOne({email});
+        const user = await User.findOne({email}).populate("additionalDetails");
         if(!user){
             return res.status(402).json({
                 success: false,
@@ -165,12 +165,15 @@ exports.login = async(req, res) => {
             })
         }
 
+        // const hashedPassword = await bcrypt.hash(password, 10);
+        console.log(password + "  " + user.password)
         // Match passwords and genrate JWT, cookies
         if(await bcrypt.compare(password, user.password)){
+            console.log("...")
             const payload = {
                 email: user.email,
                 id: user._id,
-                accountType: user.accoutType
+                accountType: user.accountType
             }
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
                 expiresIn:"2h",

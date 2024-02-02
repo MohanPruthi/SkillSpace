@@ -8,11 +8,11 @@ import { setSignupData } from '../../../slices/authSlice';
 import { sendOtp } from '../../../services/operations/authAPI';
 
 
-const SignupForm = ({setIsLoggedIn}) => {
+const SignupForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [accType, setaccType] = useState(ACCOUNT_TYPE.STUDENT);
+    const [accountType, setaccType] = useState("Student");
 
     const [formData, setFormData] = useState({
         firstName:"",
@@ -48,7 +48,7 @@ const SignupForm = ({setIsLoggedIn}) => {
 
         const finalData = {
             ...formData,
-            accType
+            accountType
         }
 
         console.log("printing Final account data ");
@@ -75,14 +75,14 @@ const SignupForm = ({setIsLoggedIn}) => {
         {/* student-Instructor tab */}
         <div className='flex bg-richblack-800 rounded-full p-1 gap-z-1 my-6 max-w-max border-b-[1px]'>
             <button
-            className={`${accType==="Student"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
+            className={`${accountType==="Student"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
             py-2 px-5 rounded-full transition-all duration-200`}
             onClick={()=> setaccType("Student")}>
                 Student
             </button>
 
             <button 
-            className={`${accType==="Instructor"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
+            className={`${accountType==="Instructor"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
             py-2 px-5 rounded-full transition-all duration-200`}
             onClick={()=> setaccType("Instructor")}>
                 Instructor
