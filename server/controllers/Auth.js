@@ -73,12 +73,12 @@ exports.sendOTP = async(req, res) => {
 exports.signUp = async(req,res) => {
     try{
         // fetch data from req
-        const{firstName, lastName, email, password, confirmPassword, accountType, contactNumber, otp} = req.body;
+        const{firstName, lastName, email, password, confirmPassword, accountType, otp} = req.body;
 
         // validate 
         if(await User.findOne({email})){
             return res.status(401).json({
-                success: false,
+                success: false, 
                 message: "Unable to SingUp (User already exists)",
             })
         }
@@ -98,14 +98,14 @@ exports.signUp = async(req,res) => {
         //find most recent OTP stored for the user
         const recentOTP = await OTP.find({email}).sort({createdAt:-1}).limit(1); // fun to find most recent otp in DB
 
-        if(recentOTP.length() == 0){
+        if(!recentOTP){
             // OTP not found
             return res.status(400).json({
                 success: false,
                 message: "OTP not found"
             })
         }
-        else if(otp !== recentOTP.otp){
+        else if(otp !== recentOTP[0].otp){
             //wrong OTP
             return res.status(400).json({
                 success: false,
@@ -121,12 +121,12 @@ exports.signUp = async(req,res) => {
             gender:null,
             dateOfBirth: null,
             about:null,
-            contactNumber,
+            contactNumber:null,
         });
 
         const user = await User.create({
-            firstName, lastName, email, password:hashedPassword, accountType, contactNumber, additionalDetails:profileDetails._id,
-            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstname} ${lastName}`
+            firstName, lastName, email, password:hashedPassword, accountType, additionalDetails:profileDetails._id,
+            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
         })
         console.log("New User created: ", user);
 

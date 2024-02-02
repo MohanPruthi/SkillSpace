@@ -16,15 +16,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    password: {
+    password: { 
         type: String,
         required: true,
     },
-    confirmPassword: {
-        type: String,
-        required: true,
-    },
-    accoutType: {
+    accountType: {
         type: String,
         enum: ["Admin", "Student", "Instructor"],
         required: true,              // here

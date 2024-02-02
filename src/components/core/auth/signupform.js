@@ -2,10 +2,17 @@ import React, { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import {toast} from "react-hot-toast"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ACCOUNT_TYPE } from '../../../utils/constants';
+import { setSignupData } from '../../../slices/authSlice';
+import { sendOtp } from '../../../services/operations/authAPI';
 
 
 const SignupForm = ({setIsLoggedIn}) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [accType, setaccType] = useState(ACCOUNT_TYPE.STUDENT);
 
     const [formData, setFormData] = useState({
         firstName:"",
@@ -16,61 +23,73 @@ const SignupForm = ({setIsLoggedIn}) => {
     })
 
     const [showPassword, setShowPassword] = useState(false);
-    const [accType, setaccType] = useState("student");
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    function changeHandler(event) {
-
+    const { firstName, lastName, email, password, confirmPassword } = formData
+    
+    // Handle input fields, when some value changes
+    function handleOnChange(event) {
         setFormData( (prevData) =>(
             {
                 ...prevData,
                 [event.target.name]:event.target.value
             }
         ) )
-
     }
 
-    function submitHandler(event) {
+    function handleOnSubmit(event) {
         event.preventDefault();
+
         if(formData.password != formData.confirmPassword) {
             toast.error("Passwords do not match");
             return ;
         }
 
-        setIsLoggedIn(true);
-        toast.success("Account Created");
 
         const finalData = {
             ...formData,
             accType
         }
+
         console.log("printing Final account data ");
         console.log(finalData);
 
-        navigate("/dashboard");
+        dispatch(setSignupData(finalData));
+        dispatch(sendOtp(formData.email, navigate));
 
+        // Reset
+        setFormData({ 
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        })
+        setaccType(ACCOUNT_TYPE.STUDENT);
     }
 
-
+    
+      
   return (
     <div>
         {/* student-Instructor tab */}
         <div className='flex bg-richblack-800 rounded-full p-1 gap-z-1 my-6 max-w-max border-b-[1px]'>
             <button
-            className={`${accType==="student"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
+            className={`${accType==="Student"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
             py-2 px-5 rounded-full transition-all duration-200`}
-            onClick={()=> setaccType("student")}>
+            onClick={()=> setaccType("Student")}>
                 Student
             </button>
 
             <button 
-            className={`${accType==="instructor"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
+            className={`${accType==="Instructor"? "bg-richblack-900 text-richblack-5" : "bg-transparent text-richblack-200"} 
             py-2 px-5 rounded-full transition-all duration-200`}
-            onClick={()=> setaccType("instructor")}>
+            onClick={()=> setaccType("Instructor")}>
                 Instructor
             </button>
         </div>
 
-        <form onSubmit={submitHandler} className='flex flex-col w-full gap-y-4 mt-6'>
+        <form onSubmit={handleOnSubmit} className='flex flex-col w-full gap-y-4 mt-6'>
         {/* first name and lastName */}
             <div className='flex flex-row gap-x-4'>
                     <label className='w-full'>
@@ -81,7 +100,7 @@ const SignupForm = ({setIsLoggedIn}) => {
                             required
                             type="text"
                             name="firstName"
-                            onChange={changeHandler}
+                            onChange={handleOnChange}
                             placeholder="Enter First Name"
                             value={formData.firstName}
                             className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b-[1px]'
@@ -96,7 +115,7 @@ const SignupForm = ({setIsLoggedIn}) => {
                             required
                             type="text"
                             name="lastName"
-                            onChange={changeHandler}
+                            onChange={handleOnChange}
                             placeholder="Enter Last Name"
                             value={formData.lastName}
                             className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b-[1px]'
@@ -112,7 +131,7 @@ const SignupForm = ({setIsLoggedIn}) => {
                         required
                         type="email"
                         name="email"
-                        onChange={changeHandler}
+                        onChange={handleOnChange}
                         placeholder="Enter Email Address "
                         value={formData.email}
                         className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b-[1px]'
@@ -129,7 +148,7 @@ const SignupForm = ({setIsLoggedIn}) => {
                         required
                         type= {showPassword ? ("text") : ("password")}
                         name="password"
-                        onChange={changeHandler}
+                        onChange={handleOnChange}
                         placeholder="Enter Password"
                         value={formData.password}
                         className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b-[1px]'
@@ -144,16 +163,16 @@ const SignupForm = ({setIsLoggedIn}) => {
                         Confirm Password<sup className='text-pink-200'>*</sup>
                     </p>
                     <input
-                        required
-                        type= {showPassword ? ("text") : ("password")}
+                        required 
+                        type= {showConfirmPassword ? ("text") : ("password")}
                         name="confirmPassword"
-                        onChange={changeHandler}
+                        onChange={handleOnChange}
                         placeholder="Confirm Password"
                         value={formData.confirmPassword}
                         className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b-[1px]'
                     />
-                    <span onClick={() => setShowPassword((prev) => !prev)} className='absolute right-3 top-[38px] cursor-pointer'>
-                        {showPassword ? (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>) : (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>)}
+                    <span onClick={() => setShowConfirmPassword((prev) => !prev)} className='absolute right-3 top-[38px] cursor-pointer'>
+                        {showConfirmPassword ? (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>) : (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>)}
                     </span>
                 </label>
             </div>

@@ -4,7 +4,6 @@ import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconncetor"
 import { endpoints } from "../apis"
-import { useNavigate } from "react-router-dom"
 
 const {
   SENDOTP_API,
@@ -59,6 +58,7 @@ export function signUp(
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
+      console.log("try" + accountType + " " + firstName + " " + otp)
       const response = await apiConnector("POST", SIGNUP_API, {
         accountType,
         firstName,
@@ -76,7 +76,8 @@ export function signUp(
       }
       toast.success("Signup Successful")
       navigate("/login")
-    } catch (error) {
+    }
+    catch (error) {
       console.log("SIGNUP API ERROR............", error)
       toast.error("Signup Failed")
       navigate("/signup")
