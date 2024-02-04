@@ -165,18 +165,15 @@ exports.login = async(req, res) => {
             })
         }
 
-        // const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(password + "  " + user.password)
         // Match passwords and genrate JWT, cookies
         if(await bcrypt.compare(password, user.password)){
-            console.log("...")
             const payload = {
                 email: user.email,
                 id: user._id,
                 accountType: user.accountType
             }
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
-                expiresIn:"2h",
+                expiresIn:"24h",
             });
             user.token = token;
             user.password = undefined;

@@ -26,12 +26,11 @@ const Navbar = () => {
     const{token} = useSelector((state) => state.auth);
     const{user} = useSelector((state) => state.profile);
     const{totalItems} = useSelector((state) => state.cart);
-
+    console.log("token" + token);
     const[subLinks, setSubLinks] = useState([]);
 
     const fetchSubLinks = async() => {
         try{
-            console.log("catiiee")
             console.log(categories.CATEGORIES_API)
             const result = await apiConnector("GET", categories.CATEGORIES_API);
             console.log("Printing Sublinks result:" , result);
@@ -113,7 +112,7 @@ const Navbar = () => {
                         user && user?.accountType != "Instructor" && (
                             <Link to="/dashboard/cart" className='relative'>
                                 <AiOutlineShoppingCart className='text-white'/>
-                                {
+                                { 
                                     totalItems > 0 && (
                                         <span>
                                             {totalItems}
