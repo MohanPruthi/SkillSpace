@@ -10,15 +10,24 @@ import LearningLanguageSection from '../components/core/homePage/LearningLanguag
 import InstructorSection from '../components/core/homePage/InstructorSection';
 import Footer from '../components/common/Footer';
 import ExploreMore from '../components/core/homePage/ExploreMore';
+import { useState } from 'react';
 
 const Home = () => {
+    const [cursorPosition, setCursorPosition] = useState({top:-300, left: -300})
+    const onMouseMove = e =>{
+        setCursorPosition({ top: e.screenY, left: e.screenX });
+    }
+        
   return (
-
+    
     <div>
       {/* Section1  */}
-      <div   className='w-11/12 mt-[124px] relative mx-auto flex flex-col max-w-maxContent items-center 
+      <div  onMouseMove={onMouseMove}  className='w-11/12 mt-[124px] relative mx-auto flex flex-col max-w-maxContent items-center 
       text-white justify-between'>
 
+        <div style={{position: 'fixed', ...cursorPosition }} className={`rounded-full  w-[372.95px] h-[257.05px] bg-gradient-to-br from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] opacity-[20%]  blur-[34px] translate-x-[-10%] translate-y-[-10%]`}>
+
+        </div>
         <Link to={"/signup"}>
             <div className='w-[235px] h-[44px] group p-[4px] gap-[5px] rounded-full bg-richblack-800 
             transition-all duration-200 hover:scale-95 '>
@@ -60,7 +69,7 @@ const Home = () => {
         </div>
 
         {/* Code Section 1  */}
-        <div className=''>
+        <div>
             <CodeBlocks 
                 position={"lg:flex-row"}
                 heading={
