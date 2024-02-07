@@ -8,10 +8,10 @@ function RenderTotalAmount(){
 
     }
   
-    return(
+    return( 
         <div>
             <p>Total:</p>
-            <p>Rs {total}</p>
+            <p>Rs. {total}</p>
 
             <IconButton 
                 text="Buy Now"
