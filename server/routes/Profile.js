@@ -7,7 +7,7 @@ const {
   updateProfile,
   getAllUserDetails,
   // updateDisplayPicture,
-  // getEnrolledCourses,
+  getEnrolledCourses,
 } = require("../controllers/Profile")
 
 // ********************************************************************************************************
@@ -18,7 +18,7 @@ router.delete("/deleteProfile", auth, deleteAccount)  // why no auth?
 router.put("/updateProfile", auth, updateProfile)
 router.get("/getUserDetails", auth, getAllUserDetails)
 // Get Enrolled Courses
-// router.get("/getEnrolledCourses", auth, getEnrolledCourses)   // pending controller
+/router.get("/getEnrolledCourses", auth, getEnrolledCourses)   // pending controller
 // router.put("/updateDisplayPicture", auth, updateDisplayPicture) // pending controller
 
 module.exports = router
