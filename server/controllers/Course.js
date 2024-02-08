@@ -5,9 +5,9 @@ const uploadImageToCloudinary = require("../utils/imageUploader");
 
 //createCourse
 exports.createCourse = async(req, res) => {
-    try{
+    try{ 
         // fetch data
-        const {courseName, courseDescription, whatYouWillLearn, price, category} = req.body;
+        const {courseName, courseDescription, whatYouWillLearn, price, category, tag, instructions, status} = req.body;
 
         // fetch image
         const thumbnail = req.files.thumbnailImage;
@@ -19,6 +19,9 @@ exports.createCourse = async(req, res) => {
                 message:'All fields are required',
             });
         }
+        if (!status || status === undefined) {
+			status = "Draft";
+		}
 
         // check instructor
         const instructorDetails = req.user.id;  // jo user course create kr rha h uski user id = instructorId
@@ -58,6 +61,9 @@ exports.createCourse = async(req, res) => {
             price,
             category:categoryDetails._id,
             thumbnail:thumbnailImage.secure_url,
+            tag,
+            status,
+            instructions
         })
 
         //add the new course to the user schema of Instructor
@@ -71,8 +77,10 @@ exports.createCourse = async(req, res) => {
             {new:true},
         );
 
-        //update TAG ka schema 
+        //update TAG ka schema  -> done (I guess?) 
         //TODO: HW
+
+        // Add the new course to the Categories
         await Category.findByIdAndUpdate(
             {_id: category._id},
             {

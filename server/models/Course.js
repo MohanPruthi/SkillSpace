@@ -35,7 +35,7 @@ const courseSchema = new mongoose.Schema({
         type: String,
     }, 
     tag: {
-		type: String,
+		type: [String],
         required: true
 	}, 
     category: {                      //Lafda  // phle ye tag tha
@@ -48,7 +48,14 @@ const courseSchema = new mongoose.Schema({
             ref: "User", 
             required: true,
         }
-    ]
+    ],
+    instructiona: {
+        type: [string]
+    },
+    status: {
+        type: string,
+        enum: ["Draft", "Published"]
+    }
 });
 
 module.exports = mongoose.model("Course", courseSchema);
