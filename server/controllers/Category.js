@@ -1,3 +1,4 @@
+// const { markLectureAsComplete } = require("../../src/services/operations/courseDetailsAPI");
 const Category = require("../models/Category");
 
 exports.createCategory = async(req, res) => {
@@ -40,7 +41,10 @@ exports.getAllCategories = async (req, res) => {
         })
     }
     catch(err){
-
+        return res.status(500).json({
+            success:false,
+            message:err.message,
+        })
     }
 }
 
