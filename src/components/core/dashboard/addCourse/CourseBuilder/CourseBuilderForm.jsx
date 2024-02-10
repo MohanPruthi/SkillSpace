@@ -14,7 +14,7 @@ const CourseBuilderForm = () => {
 
     return (
         <div>
-            bhai ye kya hora h
+            section
         </div>
     )
 }
