@@ -7,7 +7,7 @@ import CourseBuilderForm from './CourseBuilder/CourseBuilderForm'
 const RenderSteps = () => {
 
     const {step} = useSelector((state)=>state.course);
-    // const step = 2;
+    
     const steps = [
         {
           id: 1,

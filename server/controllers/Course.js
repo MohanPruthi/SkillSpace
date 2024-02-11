@@ -6,14 +6,12 @@ const uploadImageToCloudinary = require("../utils/imageUploader");
 //createCourse
 exports.createCourse = async(req, res) => {
     try{ 
-        console.log("1")
         // fetch data
         const {courseName, courseDescription, whatYouWillLearn, price, category, instructions, status} = req.body;   //,tag
 
         // fetch image
         // const thumbnail = req.files.thumbnailImage;
 
-        console.log("2")
         //validation
         if(!courseName || !courseDescription || !whatYouWillLearn || !price || !category ) {   //|| !thumbnail
             return res.status(400).json({
@@ -24,7 +22,6 @@ exports.createCourse = async(req, res) => {
         if (!status || status === undefined) {
 			status = "Draft";
 		}
-        console.log("3")
         // check instructor
         const instructorDetails = req.user.id;  // jo user course create kr rha h uski user id = instructorId
         console.log("Instructor Details: " , instructorDetails);
@@ -41,7 +38,6 @@ exports.createCourse = async(req, res) => {
                 message:'Instructor Details not found',
             });
         }
-        console.log("4")
         //check given Category is valid or not
         const categoryDetails = await Category.findById(category);
         if(!categoryDetails) {
@@ -50,12 +46,11 @@ exports.createCourse = async(req, res) => {
                 message:'Category Details not found',
             });
         }
-        console.log("5")
         //Upload Image top Cloudinary
         // const thumbnailImage = await uploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME);
 
         //create an entry for new Course
-        const newCourse = Course.create({
+        const newCourse = await Course.create({
             courseName,
             courseDescription,
             instructor: instructorDetails,
@@ -67,7 +62,7 @@ exports.createCourse = async(req, res) => {
             status,
             instructions
         })
-        console.log("6")
+        console.log(newCourse + "newcourse")
         //add the new course to the user schema of Instructor
         await User.findByIdAndUpdate(
             {_id: instructorDetails},
@@ -78,8 +73,6 @@ exports.createCourse = async(req, res) => {
             }, 
             {new:true},
         );
-        console.log("7")
-        console.log("cat id " + category)
         //update TAG ka schema  -> done (I guess?) 
         //TODO: HW
 
@@ -93,7 +86,6 @@ exports.createCourse = async(req, res) => {
             },
             {new:true},
         );
-        console.log("8")
         //return response
         return res.status(200).json({
             success:true,

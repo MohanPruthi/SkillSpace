@@ -23,7 +23,7 @@ const CourseInformationForm = () => {
 
     const dispatch = useDispatch();
     const {token} = useSelector((state)=>state.auth);
-    const {course, editCourse} = ((state)=>state.course);
+    const {course, editCourse} = useSelector((state)=>state.course);
     const [loading, setLoading] = useState(false);
     const [courseCategories, setCourseCategories] = useState([]);
 
@@ -59,7 +59,7 @@ const CourseInformationForm = () => {
             currentValues.courseTitle !== course.courseName ||
             // currentValues.courseTags.toString() !== course.tag.toString() ||
             currentValues.courseBenefits !== course.whatYouWillLearn ||
-            currentValues.courseCategory._id !== course.category._id ||
+            currentValues.courseCategory !== course.category ||
             // currentValues.courseImage !== course.thumbnail ||
             currentValues.courseRequirements.toString() !== course.instructions.toString() )
             return true;
@@ -91,7 +91,7 @@ const CourseInformationForm = () => {
                     formData.append("whatYouWillLearn", data.courseBenefits);
                 }
 
-                if(currentValues.courseCategory._id !== course.category._id) {
+                if(currentValues.courseCategory !== course.category) {
                     formData.append("category", data.courseCategory);
                 }
 
@@ -100,16 +100,17 @@ const CourseInformationForm = () => {
                 // }
                 
                 // thumbnail TO-DO
-
+                console.log(currentValues.courseRequirements + "  CC  " + course.instructions)
                 if(currentValues.courseRequirements.toString() !== course.instructions.toString()) {
                     formData.append("instructions", JSON.stringify(data.courseRequirements));
                 }
 
                 setLoading(true);
-                const result = editCourseDetails(formData, token);
+                const result = await editCourseDetails(formData, token);
                 setLoading(false);
                 if(result){
                     setStep(2);
+                    console.log("hui tou tu")
                     dispatch(setCourse(result));        //yaha dispatch kyu?.... ye toh slice h na
                 }
             }
@@ -138,12 +139,16 @@ const CourseInformationForm = () => {
             console.log("PRINTING FORMDATA", formData);
             const result = await addCourseDetails(formData,token);
             if(result) {
+                console.log("huii")
+                dispatch(setCourse(result));
+                console.log(course + " coursee3e")
                 dispatch(setStep(2));
-                dispatch(setCourse(result));            //yaha dispatch kyu?.... ye toh slice h na
+                //yaha dispatch kyu?.... ye toh slice h na
             }
             setLoading(false);
             console.log("PRINTING FORMDATA", formData);
             console.log("PRINTING result", result);
+            console.log(course + " course")
         }
     }
 

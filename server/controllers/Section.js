@@ -4,8 +4,9 @@ const Course = require("../models/Course");
 // create Section
 exports.createSection = async(req, res) => {
     try{
+        console.log("1")
         const {sectionName, courseId} = req.body;
-
+        console.log(sectionName + "  LL " + courseId)
         if(!sectionName || !courseId){
             return res.status(400).json({
                 success: false,

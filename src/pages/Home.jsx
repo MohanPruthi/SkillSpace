@@ -25,7 +25,7 @@ const Home = () => {
       <div  onMouseMove={onMouseMove}  className='w-11/12 mt-[124px] relative mx-auto flex flex-col max-w-maxContent items-center 
       text-white justify-between'>
 
-        <div style={{position: "absolute", ...cursorPosition }} className={` rounded-full  w-[372.95px] h-[257.05px] bg-gradient-to-br from-[#cb1fff] via-[#ec9fe4] to-[#c28dea] opacity-[20%]  blur-[34px] translate-x-[-10%] translate-y-[-10%]`}>
+        <div style={{position: "absolute", ...cursorPosition }} className={` rounded-full  w-[272.95px] h-[257.05px] bg-gradient-to-br from-[#cb1fff] via-[#ec9fe4] to-[#c28dea] opacity-[20%]  blur-[34px] translate-x-[-55%] translate-y-[-145%]`}>
 
         </div>
         <Link to={"/signup"}>
