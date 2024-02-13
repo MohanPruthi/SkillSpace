@@ -180,14 +180,14 @@ export const updateSection = async (data, token) => {
   const toastId = toast.loading("Loading...")
   try {
     const response = await apiConnector("POST", UPDATE_SECTION_API, data, {
-      Authorization: `Bearer ${token}`,
+      Authorisation: `Bearer ${token}`,
     })
     console.log("UPDATE SECTION API RESPONSE............", response)
     if (!response?.data?.success) {
       throw new Error("Could Not Update Section")
     }
     toast.success("Course Section Updated")
-    result = response?.data?.data
+    result = response?.data?.course1
   } catch (error) {
     console.log("UPDATE SECTION API ERROR............", error)
     toast.error(error.message)

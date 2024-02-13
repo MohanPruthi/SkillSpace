@@ -23,9 +23,14 @@ exports.createSection = async(req, res) => {
                                                                         courseContent: newSection._id
                                                                             }
                                                                         }, {new: true}
-                                                                    );
+                                                                    ).populate({
+                                                                        path: "courseContent", 
+                                                                        populate:{
+                                                                            path: "subSection"
+                                                                        }
+                                                                    }).exec();
         //HW: use populate to replace sections/sub-sections both in the updatedCourseDetails
-
+        console.log(updatedCourseDetails + "  server ")
         return res.status(200).json({
             success: true,
             message: "New section created",
@@ -46,20 +51,27 @@ exports.createSection = async(req, res) => {
 //update section
 exports.updateSection = async(req, res) => {
     try{
-        const{sectionName, sectionID} = req.body;
-
-        if(!sectionName || !sectionID){
+        const{sectionName, sectionId, courseId} = req.body;
+        // console.log("sec- " + sectionName + sectionId)
+        if(!sectionName || !sectionId){
             return res.status(401).json({
                 success:false,
                 message: "can't update section details"
             })
-        }
+        } 
 
-        const updatedSection = await Section.findByIdAndUpdate(sectionID, {sectionName}, {new: true});
-
+        const updatedSection = await Section.findByIdAndUpdate(sectionId, {sectionName}, {new: true});
+        const course1 = await Course.findById(courseId).populate({
+            path: "courseContent", 
+            populate:{
+                path: "subSection"
+            }
+        }).exec();
+        console.log(course1 + " server course")
         return res.status(200).json({
             success: true,
-            message: "Section updated!"
+            message: "Section updated!",
+            course1
         })
     }
     catch(err){

@@ -5,6 +5,7 @@ import {MdEdit} from "react-icons/md"
 import {RiDeleteBin6Line} from "react-icons/ri"
 import {BiDownArrow} from "react-icons/bi"
 import {AiOutlinePlus} from "react-icons/ai"
+import SubSectionModal from './SubSectionModal'
 
 const NestedView = ({handleChangeEditSectionName}) => {
 
@@ -16,7 +17,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
     const [viewSubSection, setViewSubSection] = useState(null);
     const [editSubSection, setEditSubSection] = useState(null);
     const [confirmationModal, setConfirmationModal] = useState(null);
-
+    // green
     const handleDeleteSection = () => {
 
     }
@@ -34,7 +35,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
                             <summary className='flex items-center justify-between gap-x-3 border-b-2'>
                                 <div className='flex items-center gap-x-3'>
                                     <RxDropdownMenu/>
-                                    <p>{section} hui</p>
+                                    <p>{section.sectionName}</p>
                                 </div>
 
                                 <div className=' flex items-center gap-x-3'>

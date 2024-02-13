@@ -18,7 +18,7 @@ const CourseBuilderForm = () => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
-    console.log("C ID " + course._id + "-> " + course.instructions)
+    // console.log("C ID " + course._id + "-> " + course.instructions)
 
     useEffect(() => {
         console.log("UPDATED");
@@ -28,6 +28,7 @@ const CourseBuilderForm = () => {
         setLoading(true);
         let result;
         if(editSectionName){
+            console.log("sec22- " + editSectionName)
             result = await updateSection(
                 {
                     sectionName: data.sectionName,
@@ -42,7 +43,7 @@ const CourseBuilderForm = () => {
                 courseId: course._id,
             }, token)
         }
-
+        console.log("res-> " + result)
         if(result){
             console.log("updated res " + result)
             dispatch(setCourse(result));
