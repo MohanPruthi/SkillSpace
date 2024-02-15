@@ -6,6 +6,7 @@ import {RiDeleteBin6Line} from "react-icons/ri"
 import {BiDownArrow} from "react-icons/bi"
 import {AiOutlinePlus} from "react-icons/ai"
 import SubSectionModal from './SubSectionModal'
+import ConfirmationModal from "../../../../common/ConfirmationModal"
 
 const NestedView = ({handleChangeEditSectionName}) => {
 
@@ -108,6 +109,36 @@ const NestedView = ({handleChangeEditSectionName}) => {
             </div>
 
             {/* Modals */}
+            {
+                addSubSection ? 
+                (<SubSectionModal 
+                    modalData={addSubSection}
+                    setModalData={setAddSubSection}
+                    add={true}
+                />) 
+                :viewSubSection ? 
+                (<SubSectionModal 
+                    modalData={viewSubSection}
+                    setModalData={setViewSubSection}
+                    view={true}
+                />) 
+                : editSubSection ? 
+                (<SubSectionModal  
+                    modalData={editSubSection}
+                    setModalData={setEditSubSection}
+                    edit={true}
+                />)
+                : (<div></div>)
+            }
+
+            {
+                confirmationModal ? 
+                (
+                    <ConfirmationModal modalData={confirmationModal} />
+                )
+                : (<div></div>)
+            }
+
             
         </div>
     )
