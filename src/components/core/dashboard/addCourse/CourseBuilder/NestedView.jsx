@@ -7,6 +7,8 @@ import {BiDownArrow} from "react-icons/bi"
 import {AiOutlinePlus} from "react-icons/ai"
 import SubSectionModal from './SubSectionModal'
 import ConfirmationModal from "../../../../common/ConfirmationModal"
+import { deleteSection, deleteSubSection } from '../../../../../services/operations/courseDetailsAPI'
+import { setCourse } from '../../../../../slices/courseSlice'
 
 const NestedView = ({handleChangeEditSectionName}) => {
 
@@ -19,14 +21,29 @@ const NestedView = ({handleChangeEditSectionName}) => {
     const [editSubSection, setEditSubSection] = useState(null);
     const [confirmationModal, setConfirmationModal] = useState(null);
     // green
-    const handleDeleteSection = () => {
-
+    const handleDeleteSection = async(sectionId) => {
+        const result = await deleteSection({
+            sectionId,
+            courseId: course._id},
+            token
+        );
+        console.log("PRINTING AFTER DELETE SECTIOn", result);
+        if(result) {
+            dispatch(setCourse(result))
+        }
+        setConfirmationModal(null);
     }
 
-    const handleDeleteSubSection = () => {
-
+    const handleDeleteSubSection = async(subSectionId, sectionId) => {
+        console.log("....")
+        const result = await deleteSubSection({subSectionId, sectionId, courseId: course._id, token});
+        if(result) {
+            //TODO: extra kya kar skte h yaha pr 
+            dispatch(setCourse(result));
+        }
+        setConfirmationModal(null);
     }
-    console.log("course builder" + course + course.courseContent[0]);
+    // console.log("course builder" + course + course.courseContent[0]);
     return (
         <div>
             <div className='rounded-lg bg-richblack-700 p-6 px-8 text-white'>
@@ -86,7 +103,8 @@ const NestedView = ({handleChangeEditSectionName}) => {
                                                     btn1Text: "Delete",
                                                     btn2Text: "Cancel",
                                                     btn1Handler: () => handleDeleteSubSection(data._id, section._id),
-                                                    btn2Handler: () => setConfirmationModal(null), })}
+                                                    btn2Handler: () => setConfirmationModal(null), })
+                                                }
                                                 >
                                                 <RiDeleteBin6Line />
                                                     

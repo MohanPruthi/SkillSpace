@@ -93,11 +93,12 @@ const SubSectionModal = ({modalData, setModalData, add=false, view=false, edit=f
         formData.append("title", data.lectureTitle);
         formData.append("description", data.lectureDesc);
         formData.append("video", data.lectureVideo);
+        formData.append("courseId", course._id);
         setLoading(true);
 
         //API call
         const result = await createSubSection(formData, token);
-
+        // console.log("result sub " + result)
         if(result){
             //TODO: check for updation
             dispatch(setCourse(result))
@@ -133,7 +134,7 @@ const SubSectionModal = ({modalData, setModalData, add=false, view=false, edit=f
                     id='lectureTitle'
                     placeholder='Enter Lecture Title'
                     {...register("lectureTitle", {required:true})}
-                    className='w-full'
+                    className='w-full text-black'
                     />
                     {
                         errors.lectureTitle && (<span>
@@ -147,7 +148,7 @@ const SubSectionModal = ({modalData, setModalData, add=false, view=false, edit=f
                         id='lectureDesc'
                         placeholder='Enter Lecture Description'
                         {...register("lectureDesc", {required:true})}
-                        className='w-full min-h-[130px]'
+                        className='w-full min-h-[130px] text-black'
                     />
                     {
                         errors.lectureDesc && (<span>

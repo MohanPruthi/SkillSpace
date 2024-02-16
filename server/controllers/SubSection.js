@@ -1,18 +1,19 @@
 const Section = require("../models/Section");
+const Course = require("../models/Course")
 const SubSection = require("../models/SubSection");
-const uploadImageToCloudinary = require("../utils/imageUploader");
+const {uploadImageToCloudinary} = require("../utils/imageUploader");
 require("dotenv").config();
 
 
 // create Sub Section
 exports.createSubSection = async(req, res) => {
     try{
-        const {title, timeDuration, description, sectionID} = req.body;
+        const {title, description, sectionId, courseId} = req.body;          
 
         // fetch video from files
-        const video = req.files.videoFile;
-
-        if(!sectionID || !title || !timeDuration || !description || !video) {
+        const video = req.files.video;
+        console.log("sub seccc-> " + "tit " + title + " ds " + description + " sec " +  sectionId + " vid " + video + " cou " + courseId)
+        if(!sectionId || !title  || !description || !video) {     
             return res.status(400).json({
                 success:false,
                 message:'All fields are required',
@@ -22,20 +23,30 @@ exports.createSubSection = async(req, res) => {
         const uploadedVideo = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
 
         // make new sub section in DB
-        const newSubSection = await SubSection.create({title, timeDuration, description, videoURL:uploadedVideo.secure_url});
+        const newSubSection = await SubSection.create({title, description,
+            timeDuration: `${uploadedVideo.duration}`, videoURL:uploadedVideo.secure_url});    
 
         // Ref sub section from section using id
-        const updatedSection = await Section.findByIdAndUpdate(sectionID, {
+        const updatedSection = await Section.findByIdAndUpdate(sectionId, {
                                                                     $push:{
                                                                         subSection: newSubSection._id
                                                                     }
-                                                                }, {new: true});
+                                                                }, {new: true}).populate("subSection");
         //HW: log updated section here, after adding populate query
 
+        // find and return course
+        const course1 = await Course.findById(courseId).populate({
+            path: "courseContent", 
+            populate:{
+                path: "subSection"
+            }
+        }).exec();
+
+
         return res.status(200).json({
-            succcess:true,
+            success:true,
             message:'Sub Section Created Successfully',
-            updatedSection,
+            course1,
         });
     }
     catch(err){
@@ -85,13 +96,31 @@ exports.updateSubSection = async(req, res) => {
 //HW:deleteSubSection
 exports.deleteSubSection = async(req, res) => {
     try{
-        const{subSectionID} = req.body;
+        const{subSectionId, sectionId, courseId} = req.body;
+        console.log("here.........")
+        //TODO[Testing]: do we need to delete the entry from the section schema ?? -> yes??  (ye kr diya)
+        await Section.findByIdAndUpdate(
+            { _id: sectionId },
+            {
+              $pull: {
+                subSection: subSectionId,
+              },
+            }
+        )
+        // delete sub section
+        await SubSection.findByIdAndDelete(subSectionId);
+        
+        const course1 = await Course.findById(courseId).populate({
+            path: "courseContent", 
+            populate:{
+                path: "subSection"
+            }
+        }).exec();
 
-        await SubSection.findByIdAndDelete(subSectionID);
-        //TODO[Testing]: do we need to delete the entry from the section schema ?? -> yes?? 
         return res.status(200).json({
-            succcess:true,
+            success:true,
             message:'Sub Section Deleted Successfully',
+            course1
         });
     }
     catch(err){
