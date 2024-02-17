@@ -98,7 +98,7 @@ exports.deleteSection = async(req, res) => {
         console.log("2")
         const section = await Section.findById(sectionId);
         //delete sub section
-        // await SubSection.deleteMany({_id: {$in: section.subSection}});               // not working
+        await SubSection.deleteMany({_id: {$in: section.subSection}});               // not working
         console.log("2.2")
         // delete section
         await Section.findByIdAndDelete(sectionId);

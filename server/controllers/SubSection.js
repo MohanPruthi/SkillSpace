@@ -58,14 +58,15 @@ exports.createSubSection = async(req, res) => {
     }
 }
 
+// hu
 
 //HW: updateSubSection
 exports.updateSubSection = async(req, res) => {
     try{
-        const{title, timeDuration, description, subSectionID} = req.body;
+        const{title, description, subSectionID} = req.body;
         const video = req.files.videoFile;
 
-        if(!subSectionID || !title || !timeDuration || !description || !video) {
+        if(!subSectionID || !title || !description || !video) {
             return res.status(400).json({
                 success:false,
                 message:'All fields are required',
