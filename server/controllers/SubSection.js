@@ -98,7 +98,6 @@ exports.updateSubSection = async(req, res) => {
 exports.deleteSubSection = async(req, res) => {
     try{
         const{subSectionId, sectionId, courseId} = req.body;
-        console.log("here.........")
         //TODO[Testing]: do we need to delete the entry from the section schema ?? -> yes??  (ye kr diya)
         await Section.findByIdAndUpdate(
             { _id: sectionId },

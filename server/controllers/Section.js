@@ -5,9 +5,7 @@ const SubSection = require ("../models/SubSection");
 // create Section
 exports.createSection = async(req, res) => {
     try{
-        console.log("1")
         const {sectionName, courseId} = req.body;
-        console.log(sectionName + "  LL " + courseId)
         if(!sectionName || !courseId){
             return res.status(400).json({
                 success: false,
@@ -31,7 +29,6 @@ exports.createSection = async(req, res) => {
                                                                         }
                                                                     }).exec();
         //HW: use populate to replace sections/sub-sections both in the updatedCourseDetails
-        console.log(updatedCourseDetails + "  server ")
         return res.status(200).json({
             success: true,
             message: "New section created",
@@ -88,21 +85,17 @@ exports.updateSection = async(req, res) => {
 exports.deleteSection = async(req, res) => {
     try{
         const {sectionId, courseId} = req.body;
-        console.log("1")
         //TODO[Testing]: do we need to delete the entry from the course schema ??   (kr diya)
         await Course.findByIdAndUpdate(courseId, {
 			$pull: {
 				courseContent: sectionId,
 			}
 		})
-        console.log("2")
         const section = await Section.findById(sectionId);
         //delete sub section
         await SubSection.deleteMany({_id: {$in: section.subSection}});               // not working
-        console.log("2.2")
         // delete section
         await Section.findByIdAndDelete(sectionId);
-        console.log("3")
         const course1 = await Course.findById(courseId).populate({
 			path:"courseContent",
 			populate: {
@@ -110,7 +103,6 @@ exports.deleteSection = async(req, res) => {
 			}
 		})
 		.exec();
-        console.log("4")
         return res.status(200).json({
             success: true,
             message: "Section Deleted",
