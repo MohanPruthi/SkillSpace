@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-
-import {
-  fetchCourseDetails,
-  getFullDetailsOfCourse,
-} from "../../../../services/operations/courseDetailsAPI" 
+import { fetchCourseDetails, getFullDetailsOfCourse } from "../../../../services/operations/courseDetailsAPI" 
 import { setCourse, setEditCourse } from "../../../../slices/courseSlice"
 import RenderSteps from "../addCourse/RenderSteps"
 
@@ -31,8 +27,8 @@ export default function EditCourse() {
 
   if (loading) {
     return (
-      <div className="grid flex-1 place-items-center">
-        <div className="spinner"></div>
+      <div className="grid flex-1 place-items-center text-white">
+        Loading...
       </div>
     )
   }
