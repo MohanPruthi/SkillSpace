@@ -28,7 +28,7 @@ const CourseInformationForm = () => {
     const [courseCategories, setCourseCategories] = useState([]);
 
     useEffect(()=>{
-        const getCategories = async() => {                  //ye saara useEffect ke bahar nhi a
+        const getCategories = async() => {                  //ye saara useEffect ke bahar nhi aayega
             setLoading(true);
             const categoris = await fetchCourseCategories();
             if(categoris.length > 0){
@@ -201,7 +201,7 @@ const CourseInformationForm = () => {
                 <HiOutlineCurrencyRupee  className='absolute top-1/2 text-richblack-400'/>
                 {
                     errors.coursePrice && (
-                        <span>Course Price is Required**</span>
+                        <span>Course Price is Required*</span>
                     )
                 }
             </div>
