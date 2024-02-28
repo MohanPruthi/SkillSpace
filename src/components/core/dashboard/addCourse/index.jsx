@@ -23,7 +23,6 @@ const AddCourse = () => {
                     <li>Code .............</li>
                     <li>Code .............</li>
                     <li>Code .............</li>
-                    <li>Code .............</li>
                 </ul>
             </div>
         </div>
