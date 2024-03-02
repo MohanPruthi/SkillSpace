@@ -4,6 +4,8 @@ import {apiConnector} from "../services/apiconnector"
 import { categories } from '../services/apis';
 import { getCatalogaPageData } from '../services/operations/pageAndComponentData';
 import Footer from "../components/common/Footer"
+import Course_Card from '../components/core/catalog/Course_Card';
+import CourseSlider from '../components/core/catalog/CourseSlider';
 
 
 const Catalog = () => {
@@ -59,7 +61,7 @@ const Catalog = () => {
                         <p>New</p>
                     </div>
                     <div>
-                        {/* <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} /> */}
+                        <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} />
                     </div>
                 </div>  
 
@@ -67,7 +69,7 @@ const Catalog = () => {
                 <div>
                 <div>Top Courses in {catalogPageData?.data?.selectedCategory?.name}</div>
                     <div>
-                        {/* <CourseSlider Courses={catalogPageData?.data?.differentCategory?.courses}/> */}
+                        <CourseSlider Courses={catalogPageData?.data?.differentCategory?.courses}/>
                     </div>
                 </div>
 
@@ -76,7 +78,7 @@ const Catalog = () => {
                     <div>Frequently Bought</div>
                     <div className='py-8'>
 
-                        {/* <div className='grid grid-cols-1 lg:grid-cols-2'>
+                        <div className='grid grid-cols-1 lg:grid-cols-2'>
 
                             {
                                 catalogPageData?.data?.mostSellingCourses?.slice(0,4)
@@ -85,7 +87,7 @@ const Catalog = () => {
                                 ))
                             }
 
-                        </div> */}
+                        </div>
 
                     </div>
                 </div>
