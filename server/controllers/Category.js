@@ -1,5 +1,10 @@
 // const { markLectureAsComplete } = require("../../src/services/operations/courseDetailsAPI");
+const { Mongoose } = require("mongoose");
 const Category = require("../models/Category");
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max)
+  }
 
 exports.createCategory = async(req, res) => {
     try{
@@ -57,7 +62,7 @@ exports.categoryPageDetails = async(req, res) => {
         const {categoryId} = req.body;
         console.log("PRINTING CATEGORY ID: ", categoryId);
 
-        const selectedCategory = await Category.findById({categoryId})
+        const selectedCategory = await Category.findById({_id: categoryId})
         .populate({
             path: "courses",
             match: { status: "Published" },
@@ -75,13 +80,13 @@ exports.categoryPageDetails = async(req, res) => {
         }
 
         // when there are no courses
-        if (selectedCategory.courses.length === 0) {
-            console.log("No courses found for the selected category.")
-            return res.status(404).json({
-            success: false,
-            message: "No courses found for the selected category.",
-            })
-        }
+        // if (selectedCategory.courses.length === 0) {                                 // not working  why??
+        //     console.log("No courses found for the selected category.")
+        //     return res.status(404).json({
+        //     success: false,
+        //     message: "No courses found for the selected category.",
+        //     })
+        // }
 
         // Get courses for other categories
         const categoriesExceptSelected = await Category.find({
