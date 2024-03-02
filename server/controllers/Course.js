@@ -80,7 +80,7 @@ exports.createCourse = async(req, res) => {
         //update TAG ka schema  -> done (I guess?) 
         //TODO: HW
 
-        // Add the new course to the Categories
+        // Add the new course to the Categories                // working?
         await Category.findByIdAndUpdate(
             {_id: category},
             {

@@ -18,8 +18,6 @@ const AddCourse = () => {
                     <li>Code .............</li>
                     <li>Code .............</li>
                     <li>Code .............</li> 
-                    <li>Code ...........</li>
-                    <li>Code ...........</li>
                     <li>Code .............</li>
                     <li>Code .............</li>
                     <li>Code .............</li>
