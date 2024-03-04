@@ -374,6 +374,8 @@ exports.deleteCourse = async (req, res) => {
           $pull: { courses: courseId },
         })
       }
+
+      // TO-DO pull the course from category //
   
       // Delete sections and sub-sections
       const courseSections = course.courseContent

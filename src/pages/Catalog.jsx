@@ -67,7 +67,7 @@ const Catalog = () => {
 
                 {/* section2 */}
                 <div>
-                <div>Top Courses in {catalogPageData?.data?.selectedCategory?.name}</div>
+                <div>Top Courses in {catalogPageData?.data?.differentCategory?.name}</div>
                     <div>
                         <CourseSlider Courses={catalogPageData?.data?.differentCategory?.courses}/>
                     </div>
