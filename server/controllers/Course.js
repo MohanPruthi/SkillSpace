@@ -208,7 +208,6 @@ exports.getAllCourses = async (req, res) => {
     }
 }
 
-
 //getCourseDetails
 exports.getCourseDetails = async (req, res) => {
     try {
