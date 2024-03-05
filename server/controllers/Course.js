@@ -330,7 +330,7 @@ exports.getFullCourseDetails = async (req, res) => {
     }
 }
   
-  // Get a list of Course for a given Instructor
+// Get a list of Course for a given Instructor
 exports.getInstructorCourses = async (req, res) => {
     try {
       // Get the instructor ID from the authenticated user or request body
@@ -355,7 +355,7 @@ exports.getInstructorCourses = async (req, res) => {
       })
     }
 }
-  // Delete the Course
+// Delete the Course
 exports.deleteCourse = async (req, res) => {
     try {
       const { courseId } = req.body
