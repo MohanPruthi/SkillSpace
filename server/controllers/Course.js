@@ -209,12 +209,12 @@ exports.getAllCourses = async (req, res) => {
 }
 
 //getCourseDetails
-exports.getCourseDetails = async (req, res) => {
+exports.getCourseDetails = async (req, res) => { 
     try {
             //get id
             const {courseId} = req.body;
             //find course details
-            const courseDetails = await Course.find(
+            const courseDetails = await Course.findOne(
                                         {_id:courseId})
                                         .populate(
                                             {
@@ -225,28 +225,41 @@ exports.getCourseDetails = async (req, res) => {
                                             }
                                         )
                                         .populate("category")
-                                        .populate("ratingAndreviews")
+                                        .populate("ratingAndReviews")
                                         .populate({
                                             path:"courseContent",
                                             populate:{
                                                 path:"subSection",
+                                                select: "-videoUrl",
                                             },
                                         })
                                         .exec();
 
-                //validation
-                if(!courseDetails) {
-                    return res.status(400).json({
-                        success:false,
-                        message:`Could not find the course with ${courseId}`,
-                    });
-                }
-                //return response
-                return res.status(200).json({
-                    success:true,
-                    message:"Course Details fetched successfully",
-                    data:courseDetails,
-                })
+    //validation
+    if(!courseDetails) {
+        return res.status(400).json({
+            success:false,
+            message:`Could not find the course with ${courseId}`,
+        });
+    }
+
+    let totalDurationInSeconds = 0
+    courseDetails.courseContent.forEach((content) => {
+      content.subSection.forEach((subSection) => {
+        const timeDurationInSeconds = parseInt(subSection.timeDuration)
+        totalDurationInSeconds += timeDurationInSeconds
+      })
+    })
+
+    const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+    
+    //return response
+    return res.status(200).json({
+        success:true,
+        message:"Course Details fetched successfully",
+        courseDetails,
+        totalDuration
+    })
 
     }
     catch(error) {
