@@ -46,11 +46,11 @@ function CourseDetailsCard({course, setConfirmationModal}) {
     }
 
     return (
-        <div>
+        <div className='bg-richblack-200'>
             <img 
                 src={ThumbnailImage}
                 alt='Thumbnail Image'
-                className='max-h-[300px] min-h-[180px] w-[400px] rounded-xl'
+                className='max-h-[300px] min-h-[180px] w-[400px] rounded-xl bg-yellow-700'
             />
             <div>
                 Rs. {CurrentPrice}

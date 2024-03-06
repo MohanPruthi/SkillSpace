@@ -3,16 +3,19 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchCourseDetails } from '../services/operations/courseDetailsAPI';
 import GetAvgRating from "../utils/avgRating"
+import setConfirmationModal from "../components/common/ConfirmationModal"
 import Error from "./Error";
 import CourseDetailsCard from '../components/core/course/CourseDetailsCard';
 import RatingStars from "../components/common/RatingStars";
 import {formatDate} from "../services/formatDate";
+import ConfirmationModal from '../components/common/ConfirmationModal';
 
 const CourseDetails = () => {
 
     const {loading} = useSelector((state)=>state.profile);
     const {courseId} = useParams();
     const [courseData, setCourseData] = useState(null);
+    const [confirmationModal, setConfirmationModal] = useState(null);
 
     useEffect(()=> {
         const getCourseFullDetails = async() => {
@@ -116,8 +119,8 @@ const CourseDetails = () => {
 
                 <div>
                     <CourseDetailsCard 
-                        // course = {courseData?.data?.courseDetails}
-                        // setConfirmationModal = {setConfirmationModal}
+                        course = {courseData?.courseDetails}
+                        setConfirmationModal = {setConfirmationModal}
                     />
                 </div>
             </div>
@@ -156,6 +159,8 @@ const CourseDetails = () => {
 
                 </div>
             </div>
+
+            {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
         
         </div>
     )
