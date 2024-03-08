@@ -22,13 +22,15 @@ import MyCourses from "./components/core/dashboard/MyCourses";
 import EditCourse from "./components/core/dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
+import ViewCourse from "./pages/ViewCourse";
+import VideoDetails from "./components/core/viewCourse/VideoDetails";
 
 function App() {
 
   const {user} = useSelector((state)=>state.profile);
 
   return (
-    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar/>
       <Routes>
 
@@ -80,6 +82,21 @@ function App() {
             )
           }
 
+        </Route>
+
+        {/* For the watching course lectures */}
+        <Route
+          element={
+            <PrivateRoute>
+              <ViewCourse />
+            </PrivateRoute>
+          }
+        >
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails />} />
+            </>
+          )}
         </Route>
 
         <Route path="*" element={<Error/>}/>
