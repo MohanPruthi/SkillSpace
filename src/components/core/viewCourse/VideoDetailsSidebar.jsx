@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VideoDetailsSidebar = () => {
+const VideoDetailsSidebar = ({setReviewModal}) => {
     return (
         <div>
             a
