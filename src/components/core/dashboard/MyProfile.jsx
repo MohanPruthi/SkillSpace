@@ -29,7 +29,6 @@ function MyProfile(){
                 onclick={()=>{
                     navigate("/dashboard/settings")
                 }}
-                outline="true"
                 >
                     <FaRegEdit /> 
                 </IconButton>
@@ -43,7 +42,6 @@ function MyProfile(){
                     onclick={()=>{
                         navigate("/dashboard/settings")
                     }}
-                    outline="true"
                     >
                         <FaRegEdit /> 
                     </IconButton>
@@ -59,7 +57,6 @@ function MyProfile(){
                     onclick={()=>{
                         navigate("/dashboard/settings")
                     }}
-                    outline="true"
                     >
                         <FaRegEdit /> 
                     </IconButton>

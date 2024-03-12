@@ -24,8 +24,8 @@ exports.createCourse = async(req, res) => {
             });
         }
         if (!status || status === undefined) {
-			status = "Draft";
-		}
+        status = "Draft";
+        }
         // check instructor
         const instructorDetails = req.user.id;  // jo user course create kr rha h uski user id = instructorId
         console.log("Instructor Details: " , instructorDetails);
@@ -67,6 +67,8 @@ exports.createCourse = async(req, res) => {
             instructions
         })
         console.log(newCourse + "newcourse")
+
+
         //add the new course to the user schema of Instructor
         await User.findByIdAndUpdate(
             {_id: instructorDetails},

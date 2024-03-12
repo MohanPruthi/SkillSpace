@@ -27,7 +27,6 @@ const MyCourses = () => {
             <div className="mb-14 flex items-center justify-between">
                 <h1 className="text-3xl font-medium text-richblack-5">My Courses</h1>
                 <IconButton
-                outline="true"
                 text="Add Course"
                 onclick={() => navigate("/dashboard/add-course")}
                 >

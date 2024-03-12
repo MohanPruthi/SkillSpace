@@ -11,7 +11,9 @@ const IconButton = ({
 }) => {
     return (
         <button disabled={disabled} onClick={onclick} type={type}
-        className={`cursor-pointer rounded-md ${outline? "bg-yellow-50 text-black" : "bg-richblack-200 text-richblack-900"}  py-[8px] px-[20px] font-semibold `}>
+        className={`flex items-center ${
+            outline ? "border border-yellow-50 bg-transparent" : "bg-yellow-50"
+          } cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-richblack-900 ${customClasses}`}>
             {
                 children? (
                 <div className='flex flex-row items-center gap-2'>

@@ -15,12 +15,13 @@ const ConfirmationModal = ({modalData}) => {
                 <IconButton
                     onclick={modalData?.btn1Handler}
                     text={modalData?.btn1Text}
-                    outline={true}
                 />
-                <IconButton
-                    onclick={modalData?.btn2Handler}
-                    text={modalData?.btn2Text}
-                />
+                <button
+                    className="cursor-pointer rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-900"
+                    onClick={modalData?.btn2Handler}
+                >
+                    {modalData?.btn2Text}
+                </button>
                 </div>
             </div>
         </div>

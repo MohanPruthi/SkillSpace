@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { updateCompletedLectures } from '../../../slices/viewCourseSlice';
 import { markLectureAsComplete } from '../../../services/operations/courseDetailsAPI';
-import { Player } from 'video-react';
+import { BigPlayButton, Player } from 'video-react';
 import 'video-react/dist/video-react.css';
-import {AiFillPlayCircle} from "react-icons/ai"
 import IconButton from '../../common/IconButton';
 
 const VideoDetails = () => {
@@ -145,7 +144,7 @@ const VideoDetails = () => {
 
 
   return (
-    <div>
+    <div className="flex flex-col gap-5 text-white">
       {
         !videoData ? (<div>
                         No Data Found
@@ -159,17 +158,23 @@ const VideoDetails = () => {
                 src={videoData?.videoURL}
                  >
 
-                <AiFillPlayCircle  />
+                <BigPlayButton position="center" />
 
                 {
                     videoEnded && (
-                        <div>
+                        <div style={{
+                            backgroundImage:
+                              "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
+                          }}
+                          className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+                        >
                             {
                                 !completedLectures.includes(subSectionId) && (
                                     <IconButton 
                                         disabled={loading}
                                         onclick={() => handleLectureCompletion()}
                                         text={!loading ? "Mark As Completed" : "Loading..."}
+                                        customClasses="text-xl max-w-max px-4 mx-auto"
                                     />
                                 )
                             }
@@ -183,10 +188,10 @@ const VideoDetails = () => {
                                     }
                                 }}
                                 text="Rewatch"
-                                customClasses="text-xl"
+                                customClasses="text-xl max-w-max px-4 mx-auto mt-2"
                             />
 
-                            <div>
+                            <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
                                 {!isFirstVideo() && (
                                     <button
                                     disabled={loading}
@@ -211,10 +216,10 @@ const VideoDetails = () => {
             </Player>
         )
       }
-      <h1>
+      <h1 className="mt-4 text-3xl font-semibold">
         {videoData?.title}
       </h1>
-      <p>
+      <p className="pt-2 pb-6">
         {videoData?.description}
       </p>
     </div>
