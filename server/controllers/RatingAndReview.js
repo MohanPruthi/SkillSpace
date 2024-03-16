@@ -5,12 +5,12 @@ const {mongoose} = require("mongoose");
 
 exports.createRating = async(req, res) => {
     try{
-        const userID = req.user.id;
-        const{rating, review, courseID} = req.body;
+        const userId = req.user.id;
+        const{rating, review, courseId} = req.body;
 
         //check if user is enrolled or not
-        const courseDetails = await Course.findOne({_id: courseID, 
-                            studentsEnrolled: {$elemMatch: {$eq: userID}} });
+        const courseDetails = await Course.findOne({_id: courseId, 
+                            studentsEnrolled: {$elemMatch: {$eq: userId}} });
 
         if(!courseDetails) {
             return res.status(404).json({
@@ -20,7 +20,7 @@ exports.createRating = async(req, res) => {
         }
 
         //check if user already reviewed the course
-        const alreadyReviewed = await RatingAndReview.findOne({user: userID, course: courseID});
+        const alreadyReviewed = await RatingAndReview.findOne({user: userId, course: courseId});
 
         if(alreadyReviewed){
             return res.status(403).json({
@@ -31,12 +31,12 @@ exports.createRating = async(req, res) => {
 
         // create new rating and review
         const ratingReview = await RatingAndReview.create({
-            rating, review, course:courseID,
-            user: userID,
+            rating, review, course:courseId,
+            user: userId,
         });
         
         // update course with new rating 
-        const updatedCourseDetails = await Course.findByIdAndUpdate({_id:courseID},
+        const updatedCourseDetails = await Course.findByIdAndUpdate({_id:courseId},
                                                                     {
                                                                         $push: {
                                                                             ratingAndReviews: ratingReview._id,
@@ -68,13 +68,13 @@ exports.createRating = async(req, res) => {
 exports.getAverageRating = async (req, res) => {
     try {
             //get course ID
-            const courseID = req.body.courseID;
+            const courseId = req.body.courseId;
             //calculate avg rating
 
             const result = await RatingAndReview.aggregate([
                 {
                     $match:{
-                        course: new mongoose.Types.ObjectId(courseID),
+                        course: new mongoose.Types.ObjectId(courseId),
                     },
                 },
                 {
