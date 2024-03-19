@@ -13,6 +13,7 @@ import ExploreMore from '../components/core/homePage/ExploreMore';
 import { useState } from 'react';
 
 const Home = () => {
+    
     const [cursorPosition, setCursorPosition] = useState({top:-300, left: -300})
     const onMouseMove = e =>{
         setCursorPosition({ top: e.screenY, left: e.screenX });
@@ -20,24 +21,21 @@ const Home = () => {
         
   return (
     
-    <div>
+    <div className=''>
       {/* Section1  */}
-      <div  onMouseMove={onMouseMove}  className='w-11/12 mt-[124px] relative mx-auto flex flex-col max-w-maxContent items-center 
-      text-white justify-between'>
+      <div  onMouseMove={onMouseMove}  className='relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-white'>
 
         <div style={{position: "absolute", ...cursorPosition }} className={` rounded-full  w-[272.95px] h-[257.05px] bg-gradient-to-br from-[#cb1fff] via-[#ec9fe4] to-[#c28dea] opacity-[20%]  blur-[34px] translate-x-[-55%] translate-y-[-145%]`}>
 
         </div>
+
         <Link to={"/signup"}>
-            <div className='w-[235px] h-[44px] group p-[4px] gap-[5px] rounded-full bg-richblack-800 
-            transition-all duration-200 hover:scale-95 '>
-                <div className='gap-[10px] p-[6px] rounded-full w-[227px] h-[36px] flex flex-row items-center text-richblack-200
-                transition-all duration-200 group-hover:bg-richblack-900'>
+            <div className='group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none'>
+                <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900'>
                     <p className=''>Become an Instructor</p>
                     <FaArrowRight />
                 </div>
             </div>
-
         </Link>
 
         <div className='text-center text-4xl font-semibold mt-7'>

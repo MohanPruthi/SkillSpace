@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Profile = require("../models/Profile");
+const Course = require("../models/Course")
 const { findByIdAndDelete } = require("../models/Section");
 
 //update profile
@@ -144,3 +145,39 @@ exports.getEnrolledCourses = async (req, res) => {
       })
     }
 };
+
+
+
+exports.instructorDashboard = async (req, res) => {
+  try {
+    console.log("0")
+
+    const courseDetails = await Course.find({ instructor: req.user.id })
+    console.log(" --  " + courseDetails)
+    console.log("1")
+    const courseData = courseDetails.map((course) => {
+      const totalStudentsEnrolled = course.studentsEnrolled.length
+      const totalAmountGenerated = totalStudentsEnrolled * course.price
+    console.log("2")
+
+      // Create a new object with the additional fields
+      const courseDataWithStats = {
+        _id: course._id,
+        courseName: course.courseName,
+        courseDescription: course.courseDescription,
+        // Include other course properties as needed
+        totalStudentsEnrolled,
+        totalAmountGenerated,
+      }
+    console.log("3")
+
+      return courseDataWithStats
+    })
+    console.log("4")
+
+    res.status(200).json({ courses: courseData })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "Server Error" })
+  }
+}
