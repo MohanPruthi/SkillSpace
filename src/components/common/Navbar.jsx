@@ -8,6 +8,7 @@ import {AiOutlineShoppingCart, AiOutlineMenu} from "react-icons/ai"
 import { apiConnector } from '../../services/apiconnector';
 import { categories } from '../../services/apis';
 import {IoIosArrowDropdownCircle} from "react-icons/io";
+import ProfileDropdown from '../core/auth/ProfileDropdown';
 
 
 const Navbar = () => {
@@ -140,7 +141,7 @@ const Navbar = () => {
                         )
                     }
                     {
-                        token !== null && <div className='text-white cursor-pointer'>acc</div> //<ProfileDropDown />
+                        token !== null &&  <ProfileDropdown />
                     }
                 </div>
 

@@ -25,6 +25,7 @@ import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/viewCourse/VideoDetails";
 import Instructor from "./components/core/dashboard/Instructor";
+import Settings from "./components/core/dashboard/settings";
 
 function App() {
 
@@ -83,6 +84,8 @@ function App() {
               </>
             )
           }
+
+        <Route path="dashboard/settings" element={<Settings />} />
 
         </Route>
 
