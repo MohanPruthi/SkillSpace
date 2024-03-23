@@ -25,9 +25,9 @@ const Home = () => {
       {/* Section1  */}
       <div  onMouseMove={onMouseMove}  className='relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-white'>
 
-        <div style={{position: "absolute", ...cursorPosition }} className={` rounded-full  w-[272.95px] h-[257.05px] bg-gradient-to-br from-[#cb1fff] via-[#ec9fe4] to-[#c28dea] opacity-[20%]  blur-[34px] translate-x-[-55%] translate-y-[-145%]`}>
+        {/* <div style={{position: "absolute", ...cursorPosition }} className={` rounded-full  w-[272.95px] h-[257.05px] bg-gradient-to-br from-[#cb1fff] via-[#ec9fe4] to-[#c28dea] opacity-[20%]  blur-[34px] translate-x-[-55%] translate-y-[-145%]`}>
 
-        </div>
+        </div> */}
 
         <Link to={"/signup"}>
             <div className='group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none'>
