@@ -149,7 +149,7 @@ exports.login = async(req, res) => {
         const{email, password} = req.body;
 
         if(!email || !password) {
-            return res.status(403). json({
+            return res.status(403).json({
                 success:false,
                 message:'Login failed (All fields are required, please try again)',
             });
@@ -198,7 +198,7 @@ exports.login = async(req, res) => {
     catch(err){
         console.log(err);
         return res.status(400).json({
-            success: flase,
+            success: false,
             message: "Unable to login, Try again :(",
         });
     }

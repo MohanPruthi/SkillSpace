@@ -248,7 +248,7 @@ export default function CourseInformationForm() {
         )}
       </div>
       {/* Course Tags */}
-      <ChipInput
+      <ChipInput 
         label="Tags"
         name="courseTags"
         placeholder="Enter Tags and press Enter"
