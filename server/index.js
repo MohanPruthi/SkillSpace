@@ -21,13 +21,21 @@ db.connect();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-    cors({
-        origin: "http://localhost:3000",
-        credentials: true,
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://skill-space-kaeeexjzd-raghavs-projects-0b174d42.vercel.app'
+];
 
-    })
-)
+app.use(cors({
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Include cookies if needed
+}));
 app.use(
     fileUpload({
         useTempFiles: true,
