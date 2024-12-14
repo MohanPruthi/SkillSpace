@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://skill-space-kaeeexjzd-raghavs-projects-0b174d42.vercel.app'
+    'https://skill-space-opal.vercel.app'
 ];
 
 app.use(cors({
